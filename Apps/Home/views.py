@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from django.urls import reverse_lazy
 from .models import Cliente
+from django.contrib.auth.views import LoginView as DjangoLoginView
 
 # Create your views here.
 class CreditosView(LoginRequiredMixin, TemplateView):
@@ -40,10 +41,14 @@ class RegistroView(CreateView):
     template_name = 'registro.html'
     success_url = reverse_lazy('Home:login')
 
-class LoginView(FormView):
-    form_class = AuthenticationForm
+
+
+class LoginView(DjangoLoginView):
     template_name = 'login.html'
     success_url = reverse_lazy('Home:homeapp')
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form, error_message="Usuario o contraseña incorrectos."))
 class VerUsuarioView(DetailView):
     model = Cliente
     template_name = 'ver_usuario.html'
