@@ -28,8 +28,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                             <li class="nav-item"><a class="nav-link" href="{% url 'Home:homeapp' %}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'Home:usuarios' %}">Usuarios</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'Home:creditos' %}">Créditos</a></li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'Home:usuarios' %}">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'Home:creditos' %}">Créditos</a></li>
+                            {% endif %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'Home:registro' %}">Registro</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'Home:login' %}">Login</a></li>
                         </ul>

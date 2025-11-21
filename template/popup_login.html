@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block contenido %}
+<div class="container mt-5">
+    <div class="alert alert-warning text-center" role="alert">
+        <strong>¡Atención!</strong> Debes iniciar sesión para ver esta página.
+    </div>
+    <script>
+        window.onload = function() {
+            alert('Debes iniciar sesión para ver esta página.');
+            window.location.href = "{% url 'Home:login' %}";
+        }
+    </script>
+</div>
+{% endblock %}
