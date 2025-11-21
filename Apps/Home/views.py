@@ -45,7 +45,8 @@ class RegistroView(CreateView):
 
 class LoginView(DjangoLoginView):
     template_name = 'login.html'
-    success_url = reverse_lazy('Home:homeapp')
+    def get_success_url(self):
+        return reverse_lazy('Home:usuarios')
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form, error_message="Usuario o contraseña incorrectos."))
